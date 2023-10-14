@@ -23,7 +23,7 @@ public class Main {
 
         try {
             mysConnection = DriverManager.getConnection("jdbc:mysql//localhost:3306/platziDB", "root", "12345");
-            System.out.println("no nos hemos conectado");
+            System.out.println("ya non conectamos");
             
             stm=mysConnection.createStatement();
             rs=stm.executeQuery("SELECT * FROM empleados");
