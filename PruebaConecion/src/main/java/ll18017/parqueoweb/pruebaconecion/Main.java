@@ -22,14 +22,14 @@ public class Main {
         ResultSet rs = null;
 
         try {
-            mysConnection = DriverManager.getConnection("jdbc:mysql//localhost:3306/platziDB", "root", "12345");
+            mysConnection = DriverManager.getConnection("jdbc:mysql://localhost:3307/universidad_torogoz", "root", "12345");
             System.out.println("no nos hemos conectado");
             
             stm=mysConnection.createStatement();
-            rs=stm.executeQuery("SELECT * FROM empleados");
+            rs=stm.executeQuery("SELECT * FROM cursos");
             
             while (rs.next()) {
-                System.out.println(rs.getString("nombre"));
+                System.out.println(rs.getString("nombre_cursos"));
                 
             }
         } catch (SQLException e) {
