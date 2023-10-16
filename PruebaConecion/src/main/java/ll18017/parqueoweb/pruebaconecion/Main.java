@@ -6,6 +6,7 @@ package ll18017.parqueoweb.pruebaconecion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,18 +19,21 @@ public class Main {
 
     public static void main(String[] args) {
         Connection mysConnection = null;
-        Statement stm = null;
+        PreparedStatement stm = null;
         ResultSet rs = null;
 
         try {
-            mysConnection = DriverManager.getConnection("jdbc:mysql://localhost:3307/universidad_torogoz", "root", "12345");
+            mysConnection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/parqueo", "postgres", "12345");
             System.out.println("no nos hemos conectado");
             
-            stm=mysConnection.createStatement();
-            rs=stm.executeQuery("SELECT * FROM cursos");
+            String sql="INSERT INTO tipo_espacio (id_tipo_espacio,nombre) VALUES (?,?)";
+            stm=mysConnection.prepareStatement(sql);
+            stm.setInt(1, 41);
+            stm.setString(2, "platzi");
+            int rowsAffected = stm.executeUpdate();
             
-            while (rs.next()) {
-                System.out.println(rs.getString("nombre_cursos"));
+            if (rowsAffected>0) {
+                System.out.println("se creo un nuevo usuario");
                 
             }
         } catch (SQLException e) {
